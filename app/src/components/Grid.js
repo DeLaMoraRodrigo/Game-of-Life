@@ -1,4 +1,4 @@
-const Grid = class {
+class Grid {
     constructor() {
         this.grid = []
     }
@@ -13,8 +13,8 @@ const Grid = class {
                 }
                 const xi = x + i;
                 const yj = y + j;
-                
-                if (xi >= 0 && xi < len && yj >=0 && yj < len) {
+
+                if (xi >= 0 && xi < len && yj >= 0 && yj < len) {
                     if (board[xi][yj]) {
                         count += 1;
                     }
@@ -33,9 +33,9 @@ const Grid = class {
                 const neighbors = this.getNeighbors(board, i, j);
                 if (neighbors === 3 && !board[i][j]) {
                     newBoard[i][j] = 1;
-                }else if ((neighbors === 2 || neighbors === 3) && board[i][j]) {
+                } else if ((neighbors === 2 || neighbors === 3) && board[i][j]) {
                     newBoard[i][j] = 1;
-                }else {
+                } else {
                     newBoard[i][j] = 0;
                 }
             }
@@ -44,93 +44,167 @@ const Grid = class {
     }
     newBlankGrid() {
         this.grid = [];
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 40; i++) {
             this.grid[i] = [];
-            for (let j = 0; j < 25; j++) {
+            for (let j = 0; j < 40; j++) {
                 this.grid[i].push(0);
             }
         }
     }
     randomGrid() {
         this.grid = [];
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 40; i++) {
             this.grid[i] = [];
-            for (let j = 0; j < 25; j++) {
-                this.grid[i].push(Math.random())
+            for (let j = 0; j < 40; j++) {
+                this.grid[i].push(Math.round(Math.random()))
             }
         }
     }
-    initRPentomino() {
-        this.newBlankGrid();
-        this.grid[19][11]=1;
-        this.grid[18][11]=1;
-        this.grid[18][12]=1;
-        this.grid[18][13]=1;
-        this.grid[17][12]=1;
-    }
-    initQueenBee() {
-        this.newBlankGrid();
-        this.grid[9][10]=1;
-        this.grid[9][11]=1;
-        this.grid[9][15]=1;
-        this.grid[9][16]=1;
-        this.grid[10][12]=1;
-        this.grid[10][13]=1;
-        this.grid[10][14]=1;
-        this.grid[11][11]=1;
-        this.grid[12][12]=1;
-        this.grid[13][13]=1;
-        this.grid[12][14]=1;
-        this.grid[11][15]=1;
-    }
     initGlider() {
         this.newBlankGrid();
-        this.grid[1][0]=1;
-        this.grid[2][1]=1;
-        this.grid[2][2]=1;
-        this.grid[1][2]=1;
-        this.grid[0][2]=1;
-    }
-    initSmallExploder() {
-        this.newBlankGrid();
-        this.grid[11][10]=1;
-        this.grid[11][11]=1;
-        this.grid[10][11]=1;
-        this.grid[12][11]=1;
-        this.grid[10][12]=1;
-        this.grid[12][12]=1;
-        this.grid[11][13]=1;
-    }
-    initExploder() {
-        this.newBlankGrid();
-        this.grid[10][9]=1;
-        this.grid[10][10]=1;
-        this.grid[10][11]=1;
-        this.grid[10][12]=1;
-        this.grid[10][13]=1;
-        this.grid[12][9]=1;
-        this.grid[12][13]=1;
-        this.grid[14][9]=1;
-        this.grid[14][10]=1;
-        this.grid[14][11]=1;
-        this.grid[14][12]=1;
-        this.grid[14][13]=1;
-    }
-    init10CellRow() {
-        this.newBlankGrid();
-        for (let i=8; i<18; i++) {
-            this.grid[i][12]=1;
-        }
+        this.grid[0][2] = 1;
+        this.grid[1][0] = 1;
+        this.grid[1][2] = 1;
+        this.grid[2][1] = 1;
+        this.grid[2][2] = 1;
     }
     initLightWeightSpaceShip() {
         this.newBlankGrid();
-        this.grid[1][15]=1;
-        for (let i=2; i<6;i++) {
-            this.grid[i][14]=1;
-        }
-        this.grid[5][15]=1;
-        this.grid[5][16]=1;
-        this.grid[4][17]=1;
-        this.grid[1][17]=1;
+        this.grid[1][19] = 1;
+        this.grid[1][21] = 1;
+        this.grid[2][18] = 1;
+        this.grid[3][18] = 1;
+        this.grid[4][18] = 1;
+        this.grid[4][21] = 1;
+        this.grid[5][18] = 1;
+        this.grid[5][19] = 1;
+        this.grid[5][20] = 1;
+    }
+    init10CellRow() {
+        this.newBlankGrid();
+        this.grid[15][20] = 1;
+        this.grid[16][20] = 1;
+        this.grid[17][20] = 1;
+        this.grid[18][20] = 1;
+        this.grid[19][20] = 1;
+        this.grid[20][20] = 1;
+        this.grid[21][20] = 1;
+        this.grid[22][20] = 1;
+        this.grid[23][20] = 1;
+        this.grid[24][20] = 1;
+    }
+    initCauldron() {
+        this.newBlankGrid();
+        this.grid[15][19] = 1;
+        this.grid[15][20] = 1;
+        this.grid[16][20] = 1;
+        this.grid[17][19] = 1;
+        this.grid[18][18] = 1;
+        this.grid[18][20] = 1;
+        this.grid[18][21] = 1;
+        this.grid[18][22] = 1;
+        this.grid[19][15] = 1;
+        this.grid[19][18] = 1;
+        this.grid[19][23] = 1;
+        this.grid[19][25] = 1;
+        this.grid[19][26] = 1;
+        this.grid[20][14] = 1;
+        this.grid[20][16] = 1;
+        this.grid[20][18] = 1;
+        this.grid[20][23] = 1;
+        this.grid[20][25] = 1;
+        this.grid[21][15] = 1;
+        this.grid[21][18] = 1;
+        this.grid[21][23] = 1;
+        this.grid[21][26] = 1;
+        this.grid[22][18] = 1;
+        this.grid[22][20] = 1;
+        this.grid[22][21] = 1;
+        this.grid[22][22] = 1;
+        this.grid[22][25] = 1;
+        this.grid[22][26] = 1;
+        this.grid[23][19] = 1;
+        this.grid[24][20] = 1;
+        this.grid[25][19] = 1;
+        this.grid[25][20] = 1;
+    }
+    initPulsar() {
+        this.newBlankGrid();
+        this.grid[18][18] = 1;
+        this.grid[18][19] = 1;
+        this.grid[18][20] = 1;
+        this.grid[18][21] = 1;
+        this.grid[18][22] = 1;
+        this.grid[20][18] = 1;
+        this.grid[20][22] = 1;
+        this.grid[22][18] = 1;
+        this.grid[22][19] = 1;
+        this.grid[22][20] = 1;
+        this.grid[22][21] = 1;
+        this.grid[22][22] = 1;
+    }
+    initRPentomino() {
+        this.newBlankGrid();
+        this.grid[28][31] = 1;
+        this.grid[29][30] = 1;
+        this.grid[29][31] = 1;
+        this.grid[29][32] = 1;
+        this.grid[30][30] = 1;
+    }
+    initQueenBee() {
+        this.newBlankGrid();
+        this.grid[18][17] = 1;
+        this.grid[18][18] = 1;
+        this.grid[18][22] = 1;
+        this.grid[18][23] = 1;
+        this.grid[19][19] = 1;
+        this.grid[19][20] = 1;
+        this.grid[19][21] = 1;
+        this.grid[20][18] = 1;
+        this.grid[20][22] = 1;
+        this.grid[21][19] = 1;
+        this.grid[21][21] = 1;
+        this.grid[22][20] = 1;
+    }
+    initGosperGliderGun() {
+        this.newBlankGrid();
+        this.grid[2][17] = 1;
+        this.grid[2][18] = 1;
+        this.grid[3][17] = 1;
+        this.grid[3][18] = 1;
+        this.grid[12][17] = 1;
+        this.grid[12][18] = 1;
+        this.grid[12][19] = 1;
+        this.grid[13][16] = 1;
+        this.grid[13][20] = 1;
+        this.grid[14][15] = 1;
+        this.grid[14][21] = 1;
+        this.grid[15][15] = 1;
+        this.grid[15][21] = 1;
+        this.grid[16][18] = 1;
+        this.grid[17][16] = 1;
+        this.grid[17][20] = 1;
+        this.grid[18][17] = 1;
+        this.grid[18][18] = 1;
+        this.grid[18][19] = 1;
+        this.grid[19][18] = 1;
+        this.grid[22][15] = 1;
+        this.grid[22][16] = 1;
+        this.grid[22][17] = 1;
+        this.grid[23][15] = 1;
+        this.grid[23][16] = 1;
+        this.grid[23][17] = 1;
+        this.grid[24][14] = 1;
+        this.grid[24][18] = 1;
+        this.grid[26][13] = 1;
+        this.grid[26][14] = 1;
+        this.grid[26][18] = 1;
+        this.grid[26][19] = 1;
+        this.grid[36][15] = 1;
+        this.grid[36][16] = 1;
+        this.grid[37][15] = 1;
+        this.grid[37][16] = 1;
     }
 }
+
+export default Grid;
