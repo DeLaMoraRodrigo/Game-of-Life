@@ -58,25 +58,17 @@ class Canvas extends Component {
             const canvas = this.refs.canvas;
             // Reference the smallest rectangle containing the canvas
             const grid = canvas.getBoundingClientRect();
-            console.log(grid)
-            console.log(e.clientX)
             // Get x and y values in relation to mouse position on grid
             const x = e.clientX - grid.left;
             const y = e.clientY - grid.top;
             // Change state of cell to alive or dead
-            console.log(this.grid.grid)
             this.toggleState(x, y);
         }
     }
     toggleState(x, y) {
-        console.log(x)
-        console.log(y)
         // Cells are 15 pixels by 15 pixels so to get the true x and y values we divide by 15
         const x_index = Math.floor(x / 15);
         const y_index = Math.floor(y / 15);
-        console.log(x_index)
-        console.log(y_index)
-        console.log(this.grid.grid[9][27])
         // If cell is dead, we set to alive. If cell not dead, we set to dead
         this.grid.grid[x_index][y_index] === 0
             ? (this.grid.grid[x_index][y_index] = 1)
@@ -158,35 +150,33 @@ class Canvas extends Component {
             switch (e.target.value) {
                 case "random":
                     this.grid.randomGrid(this.state.size);
-                    console.log(this.state.size)
                     break;
                 case "glider":
-                    this.grid.initGlider();
+                    this.grid.initGlider(this.state.size);
                     break;
                 case "lightWeightSpaceShip":
-                    this.grid.initLightWeightSpaceShip();
+                    this.grid.initLightWeightSpaceShip(this.state.size);
                     break;
                 case "10CellRow":
-                    this.grid.init10CellRow();
+                    this.grid.init10CellRow(this.state.size);
                     break;
                 case "cauldron":
-                    this.grid.initCauldron();
+                    this.grid.initCauldron(this.state.size);
                     break;
                 case "pulsar":
-                    this.grid.initPulsar();
+                    this.grid.initPulsar(this.state.size);
                     break;
                 case "rPentomino":
-                    this.grid.initRPentomino();
+                    this.grid.initRPentomino(this.state.size);
                     break;
                 case "queenBee":
-                    this.grid.initQueenBee();
+                    this.grid.initQueenBee(this.state.size);
                     break;
                 case "gosperGliderGun":
-                    this.grid.initGosperGliderGun();
+                    this.grid.initGosperGliderGun(this.state.size);
                     break;
                 default:
                     this.grid.newBlankGrid(this.state.size);
-                    console.log(this.state.size)
                     break;
             }
             this.setState({

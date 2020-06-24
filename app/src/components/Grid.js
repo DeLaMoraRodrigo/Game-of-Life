@@ -76,16 +76,16 @@ class Grid {
         }
     }
     // Preset board configurations
-    initGlider() {
-        this.newBlankGrid();
+    initGlider(size) {
+        this.newBlankGrid(size);
         this.grid[0][2] = 1;
         this.grid[1][0] = 1;
         this.grid[1][2] = 1;
         this.grid[2][1] = 1;
         this.grid[2][2] = 1;
     }
-    initLightWeightSpaceShip() {
-        this.newBlankGrid();
+    initLightWeightSpaceShip(size) {
+        this.newBlankGrid(size);
         this.grid[1][19] = 1;
         this.grid[1][21] = 1;
         this.grid[2][18] = 1;
@@ -96,8 +96,8 @@ class Grid {
         this.grid[5][19] = 1;
         this.grid[5][20] = 1;
     }
-    init10CellRow() {
-        this.newBlankGrid();
+    init10CellRow(size) {
+        this.newBlankGrid(size);
         this.grid[15][20] = 1;
         this.grid[16][20] = 1;
         this.grid[17][20] = 1;
@@ -109,8 +109,8 @@ class Grid {
         this.grid[23][20] = 1;
         this.grid[24][20] = 1;
     }
-    initCauldron() {
-        this.newBlankGrid();
+    initCauldron(size) {
+        this.newBlankGrid(size);
         this.grid[15][19] = 1;
         this.grid[15][20] = 1;
         this.grid[16][20] = 1;
@@ -144,8 +144,8 @@ class Grid {
         this.grid[25][19] = 1;
         this.grid[25][20] = 1;
     }
-    initPulsar() {
-        this.newBlankGrid();
+    initPulsar(size) {
+        this.newBlankGrid(size);
         this.grid[18][18] = 1;
         this.grid[18][19] = 1;
         this.grid[18][20] = 1;
@@ -159,16 +159,16 @@ class Grid {
         this.grid[22][21] = 1;
         this.grid[22][22] = 1;
     }
-    initRPentomino() {
-        this.newBlankGrid();
+    initRPentomino(size) {
+        this.newBlankGrid(size);
         this.grid[28][31] = 1;
         this.grid[29][30] = 1;
         this.grid[29][31] = 1;
         this.grid[29][32] = 1;
         this.grid[30][30] = 1;
     }
-    initQueenBee() {
-        this.newBlankGrid();
+    initQueenBee(size) {
+        this.newBlankGrid(size);
         this.grid[18][17] = 1;
         this.grid[18][18] = 1;
         this.grid[18][22] = 1;
@@ -182,8 +182,8 @@ class Grid {
         this.grid[21][21] = 1;
         this.grid[22][20] = 1;
     }
-    initGosperGliderGun() {
-        this.newBlankGrid();
+    initGosperGliderGun(size) {
+        this.newBlankGrid(size);
         this.grid[2][17] = 1;
         this.grid[2][18] = 1;
         this.grid[3][17] = 1;
