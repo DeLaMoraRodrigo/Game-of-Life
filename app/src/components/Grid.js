@@ -50,26 +50,27 @@ class Grid {
         }
         this.grid = newBoard;
     }
-    newBlankGrid() {
+    newBlankGrid(size) {
         // Creates new board
+        console.log(size)
         this.grid = [];
         // Fills board with lists
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < (size / 15); i++) {
             this.grid[i] = [];
             // Fills cells with 0, making all cells dead
-            for (let j = 0; j < 40; j++) {
+            for (let j = 0; j < (size / 15); j++) {
                 this.grid[i].push(0);
             }
         }
     }
-    randomGrid() {
+    randomGrid(size) {
         // Creates new board
         this.grid = [];
         // Fills board with lists
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < (size / 15); i++) {
             this.grid[i] = [];
             // Fills cells with random value between 0 and 1
-            for (let j = 0; j < 40; j++) {
+            for (let j = 0; j < (size / 15); j++) {
                 this.grid[i].push(Math.round(Math.random()))
             }
         }

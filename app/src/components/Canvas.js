@@ -4,22 +4,37 @@ import RangeSlider from "react-bootstrap-range-slider";
 
 import "./Canvas.css"
 
+const small = 300;
+const medium = 450;
+const large = 600;
+
 class Canvas extends Component {
     constructor() {
         super();
         this.state = {
             generation: 0,
             is_visible: false,
-            sliderValue: 50
+            sliderValue: 50,
+            size: large
         };
     }
     componentDidMount() {
         this.draw();
         this.grid = new Grid();
-        this.grid.newBlankGrid();
+        this.grid.newBlankGrid(this.state.size);
         this.start = null;
         this.myReq = null;
         this.isClickable = true;
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.size !== this.state.size) {
+            this.draw();
+            this.grid = new Grid();
+            this.grid.newBlankGrid(this.state.size);
+            this.start = null;
+            this.myReq = null;
+            this.isClickable = true;
+        }
     }
     draw() {
         // Reference canvas element and create context for it
@@ -27,8 +42,8 @@ class Canvas extends Component {
         context.strokeStyle = "black";
         // Create grid by drawing lines every 15 pixels
         // We take the number of cells we want and multiply it by 15 to know how long we loop
-        for (let i = 0; i <= 600; i += 15) {
-            for (let j = 0; j <= 600; j += 15) {
+        for (let i = 0; i <= this.state.size; i += 15) {
+            for (let j = 0; j <= this.state.size; j += 15) {
                 context.moveTo(i, 0);
                 context.lineTo(i, j);
                 context.moveTo(0, j);
@@ -43,17 +58,25 @@ class Canvas extends Component {
             const canvas = this.refs.canvas;
             // Reference the smallest rectangle containing the canvas
             const grid = canvas.getBoundingClientRect();
+            console.log(grid)
+            console.log(e.clientX)
             // Get x and y values in relation to mouse position on grid
             const x = e.clientX - grid.left;
             const y = e.clientY - grid.top;
             // Change state of cell to alive or dead
+            console.log(this.grid.grid)
             this.toggleState(x, y);
         }
     }
     toggleState(x, y) {
+        console.log(x)
+        console.log(y)
         // Cells are 15 pixels by 15 pixels so to get the true x and y values we divide by 15
         const x_index = Math.floor(x / 15);
         const y_index = Math.floor(y / 15);
+        console.log(x_index)
+        console.log(y_index)
+        console.log(this.grid.grid[9][27])
         // If cell is dead, we set to alive. If cell not dead, we set to dead
         this.grid.grid[x_index][y_index] === 0
             ? (this.grid.grid[x_index][y_index] = 1)
@@ -70,7 +93,7 @@ class Canvas extends Component {
                 // If cell is alive fill in the cell 
                 if (this.grid.grid[i][j]) {
                     context.fillRect(i * 15, j * 15, 15, 15);
-                  // If cell is dead clear the cell
+                    // If cell is dead clear the cell
                 } else {
                     context.clearRect(i * 15, j * 15, 15, 15);
                 }
@@ -125,7 +148,7 @@ class Canvas extends Component {
             generation: 0
         })
         this.isClickable = true;
-        this.grid.newBlankGrid();
+        this.grid.newBlankGrid(this.state.size);
         this.fillCells();
         document.querySelector("select").value = "none"
     }
@@ -134,7 +157,8 @@ class Canvas extends Component {
         if (!this.start && !this.myReq) {
             switch (e.target.value) {
                 case "random":
-                    this.grid.randomGrid();
+                    this.grid.randomGrid(this.state.size);
+                    console.log(this.state.size)
                     break;
                 case "glider":
                     this.grid.initGlider();
@@ -161,12 +185,29 @@ class Canvas extends Component {
                     this.grid.initGosperGliderGun();
                     break;
                 default:
-                    this.grid.newBlankGrid();
+                    this.grid.newBlankGrid(this.state.size);
+                    console.log(this.state.size)
+                    break;
             }
             this.setState({
+                ...this.state,
                 generation: 0
             })
             this.fillCells();
+        }
+    }
+    sizeSelector = e => {
+        if(!this.start && !this.myReq) {
+            switch (e.target.value) {
+                case "small":
+                    this.setState({...this.state, size: small});
+                    break;
+                case "medium":
+                    this.setState({...this.state, size: medium});
+                    break;
+                default:
+                    this.setState({...this.state, size: large});
+            }
         }
     }
 
@@ -175,20 +216,20 @@ class Canvas extends Component {
             <div>
                 <canvas
                     ref="canvas"
-                    width={600}
-                    height={600}
+                    width={this.state.size}
+                    height={this.state.size}
                     onClick={e => this.getPosition(e)}
                 />
                 <p id="gen">
                     Current Generation: {this.state.generation}
                 </p>
 
-                <RangeSlider 
+                <RangeSlider
                     id="slider"
                     min={1}
                     max={100}
-                    value={this.state.sliderValue} 
-                    onChange={changeEvent => {this.setState({...this.state, sliderValue: changeEvent.target.value})}}
+                    value={this.state.sliderValue}
+                    onChange={changeEvent => { this.setState({ ...this.state, sliderValue: changeEvent.target.value }) }}
                 />
 
                 <div className="btnContainer">
@@ -215,10 +256,12 @@ class Canvas extends Component {
                         Clear
                     </button>
 
-                    <button onClick={() => {this.setState({...this.state, is_visible: !this.state.is_visible})}}>
+                    <button onClick={() => { this.setState({ ...this.state, is_visible: !this.state.is_visible }) }}>
                         Rules
                     </button>
                 </div>
+
+                <div>
 
                 <select onChange={this.selectHandler} defaultValue="none">
                     <option value="none">None</option>
@@ -233,13 +276,21 @@ class Canvas extends Component {
                     <option value="gosperGliderGun">Gosper Glider Gun</option>
                 </select>
 
-                {this.state.is_visible 
+                <select onChange={this.sizeSelector} defaultValue="large">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+
+                </div>
+
+                {this.state.is_visible
                     ? <div>
                         <p>Any live cell with fewer than two live neighbours dies, as if by underpopulation.</p>
                         <p>Any live cell with two or three live neighbours lives on to the next generation.</p>
                         <p>Any live cell with more than three live neighbours dies, as if by overpopulation.</p>
                         <p>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</p>
-                      </div>
+                    </div>
                     : null
                 }
             </div>
