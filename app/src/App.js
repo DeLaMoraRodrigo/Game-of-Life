@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import Canvas from "./components/Canvas"
+import Canvas from "./components/Canvas";
 
 class App extends Component {
   render() {

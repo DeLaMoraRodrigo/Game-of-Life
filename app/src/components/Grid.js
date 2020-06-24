@@ -6,15 +6,19 @@ class Grid {
         const len = board.length;
         let count = 0;
 
+        // Looping through offsets of the cell we are checking
         for (let x = -1; x <= 1; x++) {
             for (let y = -1; y <= 1; y++) {
+                // If there is no offset we dont check the cell because it is the cell we are checking for neighbors
                 if (!x && !y) {
                     continue;
                 }
                 const xi = x + i;
                 const yj = y + j;
 
+                // We check if the cell plus the offset is in bounds
                 if (xi >= 0 && xi < len && yj >= 0 && yj < len) {
+                    // If the cell at [xi] [yj] returns a truthy value it is alive so we increment count
                     if (board[xi][yj]) {
                         count += 1;
                     }
@@ -24,13 +28,17 @@ class Grid {
         return count;
     }
     step(board) {
+        // New board is made to house the next iteration of cell progression
         const newBoard = []
         const len = board.length
 
+        // Create 2D grid by filling the new board with lists
         for (let i = 0; i < len; i++) {
             newBoard.push([])
+            // Loop through each cell in grid and check neighbors to decide if cell is alive or dead
             for (let j = 0; j < len; j++) {
                 const neighbors = this.getNeighbors(board, i, j);
+                // Rules of Conway's Game of Life
                 if (neighbors === 3 && !board[i][j]) {
                     newBoard[i][j] = 1;
                 } else if ((neighbors === 2 || neighbors === 3) && board[i][j]) {
@@ -43,23 +51,30 @@ class Grid {
         this.grid = newBoard;
     }
     newBlankGrid() {
+        // Creates new board
         this.grid = [];
+        // Fills board with lists
         for (let i = 0; i < 40; i++) {
             this.grid[i] = [];
+            // Fills cells with 0, making all cells dead
             for (let j = 0; j < 40; j++) {
                 this.grid[i].push(0);
             }
         }
     }
     randomGrid() {
+        // Creates new board
         this.grid = [];
+        // Fills board with lists
         for (let i = 0; i < 40; i++) {
             this.grid[i] = [];
+            // Fills cells with random value between 0 and 1
             for (let j = 0; j < 40; j++) {
                 this.grid[i].push(Math.round(Math.random()))
             }
         }
     }
+    // Preset board configurations
     initGlider() {
         this.newBlankGrid();
         this.grid[0][2] = 1;
