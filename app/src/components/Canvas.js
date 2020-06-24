@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import Grid from "./Grid";
+import RangeSlider from "react-bootstrap-range-slider";
+
+import "./Canvas.css"
 
 class Canvas extends Component {
     constructor() {
         super();
         this.state = {
             generation: 0,
-            is_visible: false
+            is_visible: false,
+            sliderValue: 50
         };
     }
     componentDidMount() {
@@ -95,7 +99,7 @@ class Canvas extends Component {
         }
         const elapsed = timestamp - this.start;
         // Sets speed of animation
-        if (elapsed > 75) {
+        if (elapsed > (100 - this.state.sliderValue)) {
             this.grid.step(this.grid.grid);
             this.setState({
                 ...this.state,
@@ -175,9 +179,17 @@ class Canvas extends Component {
                     height={600}
                     onClick={e => this.getPosition(e)}
                 />
-                <p>
+                <p id="gen">
                     Current Generation: {this.state.generation}
                 </p>
+
+                <RangeSlider 
+                    id="slider"
+                    min={1}
+                    max={100}
+                    value={this.state.sliderValue} 
+                    onChange={changeEvent => {this.setState({...this.state, sliderValue: changeEvent.target.value})}}
+                />
 
                 <div className="btnContainer">
                     <button onClick={() => this.singleStep()}>
