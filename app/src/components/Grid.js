@@ -52,7 +52,6 @@ class Grid {
     }
     newBlankGrid(size) {
         // Creates new board
-        console.log(size)
         this.grid = [];
         // Fills board with lists
         for (let i = 0; i < (size / 15); i++) {
@@ -84,7 +83,31 @@ class Grid {
         this.grid[2][1] = 1;
         this.grid[2][2] = 1;
     }
-    initLightWeightSpaceShip(size) {
+    initLightWeightSpaceShipSmall(size) {
+        this.newBlankGrid(size);
+        this.grid[1][10] = 1;
+        this.grid[1][12] = 1;
+        this.grid[2][9] = 1;
+        this.grid[3][9] = 1;
+        this.grid[4][9] = 1;
+        this.grid[4][12] = 1;
+        this.grid[5][9] = 1;
+        this.grid[5][10] = 1;
+        this.grid[5][11] = 1;
+    }
+    initLightWeightSpaceShipMedium(size) {
+        this.newBlankGrid(size);
+        this.grid[1][15] = 1;
+        this.grid[1][17] = 1;
+        this.grid[2][14] = 1;
+        this.grid[3][14] = 1;
+        this.grid[4][14] = 1;
+        this.grid[4][17] = 1;
+        this.grid[5][14] = 1;
+        this.grid[5][15] = 1;
+        this.grid[5][16] = 1;
+    }
+    initLightWeightSpaceShipLarge(size) {
         this.newBlankGrid(size);
         this.grid[1][19] = 1;
         this.grid[1][21] = 1;
@@ -96,7 +119,33 @@ class Grid {
         this.grid[5][19] = 1;
         this.grid[5][20] = 1;
     }
-    init10CellRow(size) {
+    init10CellRowSmall(size) {
+        this.newBlankGrid(size);
+        this.grid[5][10] = 1;
+        this.grid[6][10] = 1;
+        this.grid[7][10] = 1;
+        this.grid[8][10] = 1;
+        this.grid[9][10] = 1;
+        this.grid[10][10] = 1;
+        this.grid[11][10] = 1;
+        this.grid[12][10] = 1;
+        this.grid[13][10] = 1;
+        this.grid[14][10] = 1;
+    }
+    init10CellRowMedium(size) {
+        this.newBlankGrid(size);
+        this.grid[10][15] = 1;
+        this.grid[11][15] = 1;
+        this.grid[12][15] = 1;
+        this.grid[13][15] = 1;
+        this.grid[14][15] = 1;
+        this.grid[15][15] = 1;
+        this.grid[16][15] = 1;
+        this.grid[17][15] = 1;
+        this.grid[18][15] = 1;
+        this.grid[19][15] = 1;
+    }
+    init10CellRowLarge(size) {
         this.newBlankGrid(size);
         this.grid[15][20] = 1;
         this.grid[16][20] = 1;
@@ -109,7 +158,77 @@ class Grid {
         this.grid[23][20] = 1;
         this.grid[24][20] = 1;
     }
-    initCauldron(size) {
+    initCauldronSmall(size) {
+        this.newBlankGrid(size);
+        this.grid[5][9] = 1;
+        this.grid[5][10] = 1;
+        this.grid[6][10] = 1;
+        this.grid[7][9] = 1;
+        this.grid[8][8] = 1;
+        this.grid[8][10] = 1;
+        this.grid[8][11] = 1;
+        this.grid[8][12] = 1;
+        this.grid[9][5] = 1;
+        this.grid[9][8] = 1;
+        this.grid[9][13] = 1;
+        this.grid[9][15] = 1;
+        this.grid[9][16] = 1;
+        this.grid[10][4] = 1;
+        this.grid[10][6] = 1;
+        this.grid[10][8] = 1;
+        this.grid[10][13] = 1;
+        this.grid[10][15] = 1;
+        this.grid[11][5] = 1;
+        this.grid[11][8] = 1;
+        this.grid[11][13] = 1;
+        this.grid[11][16] = 1;
+        this.grid[12][8] = 1;
+        this.grid[12][10] = 1;
+        this.grid[12][11] = 1;
+        this.grid[12][12] = 1;
+        this.grid[12][15] = 1;
+        this.grid[12][16] = 1;
+        this.grid[13][9] = 1;
+        this.grid[14][10] = 1;
+        this.grid[15][9] = 1;
+        this.grid[15][10] = 1;
+    }
+    initCauldronMedium(size) {
+        this.newBlankGrid(size);
+        this.grid[10][14] = 1;
+        this.grid[10][15] = 1;
+        this.grid[11][15] = 1;
+        this.grid[12][14] = 1;
+        this.grid[13][13] = 1;
+        this.grid[13][15] = 1;
+        this.grid[13][16] = 1;
+        this.grid[13][17] = 1;
+        this.grid[14][10] = 1;
+        this.grid[14][13] = 1;
+        this.grid[14][18] = 1;
+        this.grid[14][20] = 1;
+        this.grid[14][21] = 1;
+        this.grid[15][9] = 1;
+        this.grid[15][11] = 1;
+        this.grid[15][13] = 1;
+        this.grid[15][18] = 1;
+        this.grid[15][20] = 1;
+        this.grid[16][10] = 1;
+        this.grid[16][13] = 1;
+        this.grid[16][18] = 1;
+        this.grid[16][21] = 1;
+        this.grid[17][13] = 1;
+        this.grid[17][15] = 1;
+        this.grid[17][16] = 1;
+        this.grid[17][17] = 1;
+        this.grid[17][20] = 1;
+        this.grid[17][21] = 1;
+        this.grid[18][14] = 1;
+        this.grid[19][15] = 1;
+        this.grid[20][14] = 1;
+        this.grid[20][15] = 1;
+    }
+    initCauldronLarge(size) {
         this.newBlankGrid(size);
         this.grid[15][19] = 1;
         this.grid[15][20] = 1;
@@ -144,7 +263,37 @@ class Grid {
         this.grid[25][19] = 1;
         this.grid[25][20] = 1;
     }
-    initPulsar(size) {
+    initPulsarSmall(size) {
+        this.newBlankGrid(size);
+        this.grid[8][8] = 1;
+        this.grid[8][9] = 1;
+        this.grid[8][10] = 1;
+        this.grid[8][11] = 1;
+        this.grid[8][12] = 1;
+        this.grid[10][8] = 1;
+        this.grid[10][12] = 1;
+        this.grid[12][8] = 1;
+        this.grid[12][9] = 1;
+        this.grid[12][10] = 1;
+        this.grid[12][11] = 1;
+        this.grid[12][12] = 1;
+    }
+    initPulsarMedium(size) {
+        this.newBlankGrid(size);
+        this.grid[13][13] = 1;
+        this.grid[13][14] = 1;
+        this.grid[13][15] = 1;
+        this.grid[13][16] = 1;
+        this.grid[13][17] = 1;
+        this.grid[15][13] = 1;
+        this.grid[15][17] = 1;
+        this.grid[17][13] = 1;
+        this.grid[17][14] = 1;
+        this.grid[17][15] = 1;
+        this.grid[17][16] = 1;
+        this.grid[17][17] = 1;
+    }
+    initPulsarLarge(size) {
         this.newBlankGrid(size);
         this.grid[18][18] = 1;
         this.grid[18][19] = 1;
@@ -159,7 +308,23 @@ class Grid {
         this.grid[22][21] = 1;
         this.grid[22][22] = 1;
     }
-    initRPentomino(size) {
+    initRPentominoSmall(size) {
+        this.newBlankGrid(size);
+        this.grid[13][14] = 1;
+        this.grid[14][13] = 1;
+        this.grid[14][14] = 1;
+        this.grid[14][15] = 1;
+        this.grid[15][13] = 1;
+    }
+    initRPentominoMedium(size) {
+        this.newBlankGrid(size);
+        this.grid[23][23] = 1;
+        this.grid[24][22] = 1;
+        this.grid[24][23] = 1;
+        this.grid[24][24] = 1;
+        this.grid[25][22] = 1;
+    }
+    initRPentominoLarge(size) {
         this.newBlankGrid(size);
         this.grid[28][31] = 1;
         this.grid[29][30] = 1;
@@ -167,7 +332,37 @@ class Grid {
         this.grid[29][32] = 1;
         this.grid[30][30] = 1;
     }
-    initQueenBee(size) {
+    initQueenBeeSmall(size) {
+        this.newBlankGrid(size);
+        this.grid[8][7] = 1;
+        this.grid[8][8] = 1;
+        this.grid[8][12] = 1;
+        this.grid[8][13] = 1;
+        this.grid[9][9] = 1;
+        this.grid[9][10] = 1;
+        this.grid[9][11] = 1;
+        this.grid[10][8] = 1;
+        this.grid[10][12] = 1;
+        this.grid[11][9] = 1;
+        this.grid[11][11] = 1;
+        this.grid[12][10] = 1;
+    }
+    initQueenBeeMedium(size) {
+        this.newBlankGrid(size);
+        this.grid[13][12] = 1;
+        this.grid[13][13] = 1;
+        this.grid[13][17] = 1;
+        this.grid[13][18] = 1;
+        this.grid[14][14] = 1;
+        this.grid[14][15] = 1;
+        this.grid[14][16] = 1;
+        this.grid[15][13] = 1;
+        this.grid[15][17] = 1;
+        this.grid[16][14] = 1;
+        this.grid[16][16] = 1;
+        this.grid[17][15] = 1;
+    }
+    initQueenBeeLarge(size) {
         this.newBlankGrid(size);
         this.grid[18][17] = 1;
         this.grid[18][18] = 1;

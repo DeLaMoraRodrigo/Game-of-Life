@@ -19,6 +19,7 @@ class Canvas extends Component {
         };
     }
     componentDidMount() {
+        // Upon mounting, draw and initialize grid
         this.draw();
         this.grid = new Grid();
         this.grid.newBlankGrid(this.state.size);
@@ -27,6 +28,7 @@ class Canvas extends Component {
         this.isClickable = true;
     }
     componentDidUpdate(prevProps, prevState) {
+        // Upon changing the size of the board, redraw and reinitialize grid
         if (prevState.size !== this.state.size) {
             this.draw();
             this.grid = new Grid();
@@ -155,29 +157,77 @@ class Canvas extends Component {
                     this.grid.initGlider(this.state.size);
                     break;
                 case "lightWeightSpaceShip":
-                    this.grid.initLightWeightSpaceShip(this.state.size);
-                    break;
+                    if (this.state.size === small) {
+                        this.grid.initLightWeightSpaceShipSmall(this.state.size);
+                        break;
+                    }else if (this.state.size === medium) {
+                        this.grid.initLightWeightSpaceShipMedium(this.state.size);
+                        break;
+                    }else {
+                        this.grid.initLightWeightSpaceShipLarge(this.state.size);
+                        break;
+                    }
                 case "10CellRow":
-                    this.grid.init10CellRow(this.state.size);
-                    break;
+                    if (this.state.size === small) {
+                        this.grid.init10CellRowSmall(this.state.size);
+                        break;
+                    }else if (this.state.size === medium) {
+                        this.grid.init10CellRowMedium(this.state.size);
+                        break;
+                    }else {
+                        this.grid.init10CellRowLarge(this.state.size);
+                        break;
+                    }
+                    
                 case "cauldron":
-                    this.grid.initCauldron(this.state.size);
-                    break;
+                    if (this.state.size === small) {
+                        this.grid.initCauldronSmall(this.state.size);
+                        break;
+                    }else if (this.state.size === medium) {
+                        this.grid.initCauldronMedium(this.state.size);
+                        break;
+                    }else {
+                        this.grid.initCauldronLarge(this.state.size);
+                        break;
+                    }
                 case "pulsar":
-                    this.grid.initPulsar(this.state.size);
-                    break;
+                    if (this.state.size === small) {
+                        this.grid.initPulsarSmall(this.state.size);
+                        break;
+                    }else if (this.state.size === medium) {
+                        this.grid.initPulsarMedium(this.state.size);
+                        break;
+                    }else {
+                        this.grid.initPulsarLarge(this.state.size);
+                        break;
+                    }
                 case "rPentomino":
-                    this.grid.initRPentomino(this.state.size);
-                    break;
+                    if (this.state.size === small) {
+                        this.grid.initRPentominoSmall(this.state.size);
+                        break;
+                    }else if (this.state.size === medium) {
+                        this.grid.initRPentominoMedium(this.state.size);
+                        break;
+                    }else {
+                        this.grid.initRPentominoLarge(this.state.size);
+                        break;
+                    }
                 case "queenBee":
-                    this.grid.initQueenBee(this.state.size);
-                    break;
+                    if (this.state.size === small) {
+                        this.grid.initQueenBeeSmall(this.state.size);
+                        break;
+                    }else if (this.state.size === medium) {
+                        this.grid.initQueenBeeMedium(this.state.size);
+                        break;
+                    }else {
+                        this.grid.initQueenBeeLarge(this.state.size);
+                        break;
+                    }
                 case "gosperGliderGun":
                     this.grid.initGosperGliderGun(this.state.size);
                     break;
                 default:
                     this.grid.newBlankGrid(this.state.size);
-                    break;
             }
             this.setState({
                 ...this.state,
@@ -187,16 +237,20 @@ class Canvas extends Component {
         }
     }
     sizeSelector = e => {
-        if(!this.start && !this.myReq) {
+        // If the animation is not running decide which size board to use
+        if (!this.start && !this.myReq) {
             switch (e.target.value) {
                 case "small":
-                    this.setState({...this.state, size: small});
+                    this.setState({ ...this.state, size: small });
+                    document.querySelector("select").value = "none"
                     break;
                 case "medium":
-                    this.setState({...this.state, size: medium});
+                    this.setState({ ...this.state, size: medium });
+                    document.querySelector("select").value = "none"
                     break;
                 default:
-                    this.setState({...this.state, size: large});
+                    this.setState({ ...this.state, size: large });
+                    document.querySelector("select").value = "none"
             }
         }
     }
@@ -253,24 +307,27 @@ class Canvas extends Component {
 
                 <div>
 
-                <select onChange={this.selectHandler} defaultValue="none">
-                    <option value="none">None</option>
-                    <option value="random">Random</option>
-                    <option value="glider">Glider</option>
-                    <option value="lightWeightSpaceShip">Lightweight Spaceship</option>
-                    <option value="10CellRow">10 Cell Row</option>
-                    <option value="cauldron">Cauldron</option>
-                    <option value="pulsar">Pulsar</option>
-                    <option value="rPentomino">R-pentomino</option>
-                    <option value="queenBee">Queen Bee</option>
-                    <option value="gosperGliderGun">Gosper Glider Gun</option>
-                </select>
+                    <select onChange={this.selectHandler} defaultValue="none">
+                        <option value="none">None</option>
+                        <option value="random">Random</option>
+                        <option value="glider">Glider</option>
+                        <option value="lightWeightSpaceShip">Lightweight Spaceship</option>
+                        <option value="10CellRow">10 Cell Row</option>
+                        <option value="cauldron">Cauldron</option>
+                        <option value="pulsar">Pulsar</option>
+                        <option value="rPentomino">R-pentomino</option>
+                        <option value="queenBee">Queen Bee</option>
+                        {this.state.size === large 
+                            ? <option value="gosperGliderGun">Gosper Glider Gun</option>
+                            : null
+                        }
+                    </select>
 
-                <select onChange={this.sizeSelector} defaultValue="large">
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
-                </select>
+                    <select onChange={this.sizeSelector} defaultValue="large">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
 
                 </div>
 
