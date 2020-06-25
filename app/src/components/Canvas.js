@@ -157,6 +157,7 @@ class Canvas extends Component {
                     this.grid.initGlider(this.state.size);
                     break;
                 case "lightWeightSpaceShip":
+                    // Determine position of pattern depending on size of board
                     if (this.state.size === small) {
                         this.grid.initLightWeightSpaceShipSmall(this.state.size);
                         break;
